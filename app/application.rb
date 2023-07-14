@@ -1,28 +1,15 @@
-require_relative 'router'
+require_relative 'handler'
+require_relative 'rugo'
 
 module App
-  class Application
-    def initialize
-      @router = Router.new
-
-      @router.match('GET', '/') do
-        [200, { 'Content-Type' => 'text/html' }, ['<h1>Welcome to My Framework!</h1>']]
-      end
-
-      @router.match 'GET', '/hi' do [200, { 'Content-Type' => 'text/html' }, ["<h1>hi</h1>"]] end
-
-      @router.match('GET','/user/:id') do |params|
-        user_id = params[0]
-        [200, { 'Content-Type' => 'text/html' }, ["<h1>Welcome User with id: #{user_id}!</h1>"]]
-      end
-
-      @router.match('POST','/ugg') do |params|
-        [200, { 'Content-Type' => 'text/html' }, ["<h1>ugg!</h1>"]]
-      end
-    end
-
-    def call(env)
-      @router.execute(env)
+  class Application < Rugo::RugoBase
+    def routes
+      [
+        {method: 'GET', pattern: '/', handler: Handlers::Hello},
+        {method: 'GET', pattern: '/hi', handler: Handlers::Hello},
+        {method: 'GET', pattern: '/user/:id', handler: Handlers::User},
+        {method: 'POST', pattern: '/ugg', handler: Handlers::Hello}
+      ]
     end
   end
 end
