@@ -1,5 +1,5 @@
 require_relative 'handler'
-require_relative 'rugo'
+require 'rugo'
 
 module App
   class Application < Rugo::RugoBase

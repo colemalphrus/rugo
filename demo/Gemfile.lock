@@ -1,3 +1,8 @@
+PATH
+  remote: ..
+  specs:
+    rugo (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -12,6 +17,7 @@ PLATFORMS
 DEPENDENCIES
   puma
   rack
+  rugo!
 
 BUNDLED WITH
    2.4.6

@@ -45,7 +45,7 @@ module Rugo
 
   class HelloHandler
     def call(params)
-      [200, { 'Content-Type' => 'text/html' }, ["<h1>Hello world!</h1>"]]
+      [200, { 'Content-Type' => 'text/html' }, ["<h1>Welcome to Rugo!</h1>"]]
     end
   end
 end
