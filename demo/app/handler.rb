@@ -7,8 +7,8 @@ module Handlers
 
   class User
     def call(params)
-      user_id = params[0]
-      [200, { 'Content-Type' => 'text/html' }, ["<h1>Welcome User with id: #{user_id}!</h1>"]]
+      user_id = params[:id]
+      [200, { 'Content-Type' => 'text/html' }, ["<h1>Welcome User with id: #{params}!</h1>"]]
     end
   end
 end

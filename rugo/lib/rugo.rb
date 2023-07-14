@@ -5,16 +5,27 @@ module Rugo
     end
 
     def match(method, route, handler)
-      @routes << {method: method, pattern: Regexp.new("^#{route.gsub(/:[^\s\/]+/, '([A-Za-z0-9_]+)')}$"), handler: handler}
+      regex = /(?<=\/:)\w+(?=\/|$)/
+      # match = route.match(regex)
+      match = route.scan(regex).flatten
+      @routes << {
+        method: method,
+        pattern: Regexp.new("^#{route.gsub(/:[^\s\/]+/, '([A-Za-z0-9_]+)')}$"),
+        handler: handler,
+        path_params: match
+      }
     end
 
     def execute(env)
       req = Rack::Request.new(env)
       method = req.request_method
       path = req.path_info
+      query_params = req.params
+
       @routes.each do |route|
         if route[:method] == method && (match = route[:pattern].match(path))
-          params = match.captures
+          path_params = route[:path_params].zip(match.captures).to_h.transform_keys(&:to_sym)
+          params = path_params.merge(query_params)
           return route[:handler].new.call(params)
         end
       end
