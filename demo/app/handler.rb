@@ -10,7 +10,7 @@ module Handlers
   class User < Rugo::Handler
     def call(params)
       user_id = params[:id]
-      json 200 , {Message: "Welcome User with id: #{user_id}!"}
+      json 200 , {Message: "Welcome User with id  : #{user_id}!"}
     end
   end
 end

@@ -1,23 +1,54 @@
 PATH
   remote: ..
   specs:
-    rugo (0.0.1)
+    rugo (0.0.1.1)
+      json
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activemodel (7.0.6)
+      activesupport (= 7.0.6)
+    activerecord (7.0.6)
+      activemodel (= 7.0.6)
+      activesupport (= 7.0.6)
+    activesupport (7.0.6)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    concurrent-ruby (1.2.2)
+    ffi (1.15.5)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
+    json (2.6.3)
+    listen (3.8.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    minitest (5.18.1)
     nio4r (2.5.9)
     puma (6.3.0)
       nio4r (~> 2.0)
     rack (3.0.8)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    rerun (0.14.0)
+      listen (~> 3.0)
+    sqlite3 (1.6.3-arm64-darwin)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
 
 PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  activerecord
   puma
   rack
+  rerun
   rugo!
+  sqlite3
 
 BUNDLED WITH
    2.4.6

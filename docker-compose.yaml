@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:14.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - vpc
+
+  app:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    networks:
+      - vpc
+
+volumes:
+  pg_data:
+
+networks:
+  vpc:
+    driver: bridge

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "rugo"
-  s.version     = "0.0.1"
+  s.version     = "0.0.1.1"
   s.summary     = "A Micro Framework for Ruby"
   s.description = "A Micro Framework for Ruby"
   s.authors     = ["Cole Malphrus"]
@@ -9,4 +9,6 @@ Gem::Specification.new do |s|
   s.homepage    =
     "https://rubygems.org/gems/rugo"
   s.license       = "MIT"
+
+  s.add_dependency "json"
 end
