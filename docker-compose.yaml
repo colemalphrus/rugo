@@ -16,8 +16,9 @@ services:
 
   app:
     build: .
+    tty: true
     volumes:
-      - .:/usr/src/app
+      - ./demo:/usr/src/demo
     depends_on:
       - postgres
     ports:

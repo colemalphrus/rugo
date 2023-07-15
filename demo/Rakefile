@@ -1,4 +1,7 @@
 require "active_record"
+require "puma/cli"
+require "puma"
+require "active_record/tasks/database_tasks"
 
 namespace :db do
 
@@ -12,10 +15,21 @@ namespace :db do
     puts "Database created."
   end
 
+  desc "Create a new migration"
+  task :new_migration, [:name] do |task, args|
+    name = args[:name]
+    migration_file = File.join('db', 'migrate', "#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_#{name}.rb")
+    template = File.read(File.join('db', 'migrate', 'migration_template.rb'))
+    File.open(migration_file, 'w') do |file|
+      file.puts template.gsub('CLASS_NAME', name.camelize)
+    end
+    puts "New migration created: #{migration_file}"
+  end
+
   desc "Migrate the database"
   task :migrate do
     ActiveRecord::Base.establish_connection(db_config)
-    ActiveRecord::Migrator.migrate("db/migrate/")
+    ActiveRecord::Tasks::DatabaseTasks.migrate
     Rake::Task["db:schema"].invoke
     puts "Database migrated."
   end
@@ -64,4 +78,12 @@ end
     puts "Migration #{path} created"
     abort # needed stop other tasks
   end
+end
+
+desc "Start the Puma server"
+task :s do
+  # log_writer = Puma::LogWriter.new($stdout, $stdout)
+  # events = Puma::Events.new
+  # Puma::CLI.new(['./puma.rb'], log_writer, events).run
+  exec "rerun \"bundle exec puma -C ./puma.rb\""
 end

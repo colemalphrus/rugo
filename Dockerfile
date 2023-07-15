@@ -18,4 +18,4 @@ RUN bundle install
 
 EXPOSE 3000
 
-ENTRYPOINT puma -p 3000 -w 5
+ENTRYPOINT rake s

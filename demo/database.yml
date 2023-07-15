@@ -1,5 +1,7 @@
 # config/database.yml
-host: 'localhost'
+host: 'postgres'
 adapter: 'postgresql'
 encoding: utf-8
-database: 'test'
+database: 'app'
+password: 'password'
+username: 'postgres'
