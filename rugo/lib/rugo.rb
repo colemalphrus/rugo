@@ -1,3 +1,5 @@
+require 'json'
+
 module Rugo
   class Router
     def initialize
@@ -52,6 +54,12 @@ module Rugo
     end
   end
 
+  class Handler
+    private
+    def json(status, body)
+      [status, { 'Content-Type' => 'application/json' }, [body.to_json]]
+    end
+  end
   private
 
   class HelloHandler

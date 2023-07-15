@@ -1,14 +1,16 @@
+require 'rugo'
+
 module Handlers
-  class Hello
+  class Hello < Rugo::Handler
     def call(params)
-      [200, { 'Content-Type' => 'text/html' }, ["<h1>hi!</h1>"]]
+      json 200, {Message: "Welcome User with id: #{user_id}!"}
     end
   end
 
-  class User
+  class User < Rugo::Handler
     def call(params)
       user_id = params[:id]
-      [200, { 'Content-Type' => 'text/html' }, ["<h1>Welcome User with id: #{params}!</h1>"]]
+      json 200 , {Message: "Welcome User with id: #{user_id}!"}
     end
   end
 end
